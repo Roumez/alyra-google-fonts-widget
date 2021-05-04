@@ -1,44 +1,76 @@
 import {useEffect, useState} from "react"
 import Font from './Font'
+import GoogleFontLoader from 'react-google-font-loader'
 
-const Fonts = ({preview}) => {
+const Fonts = ({preview, size, filter}) => {
 
 const [fonts, setFonts] = useState([]);
+const [loading, setLoading] = useState(false);
+const [error, setError] = useState('')
 
 useEffect(() =>{
-  fetch(`https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyCQ_p-Bgke9T7GjRG2EX1inqD-cGZm0JVE&&sort=trending`)
-    .then((response) =>{
+  setLoading(true);
+  setError('')
+  fetch(
+    `https://www.googleapis.com/webfonts/v1/webfonts?key=${process.env.REACT_APP_GOOGLE_DEVELOPER_API_KEY}&&sort=${filter}`
+  )
+    .then((response) => {
       console.log(response);
-      if(!response.ok){
-        throw new Error(`Mauvaise manip ${response.status}}`);
+      if (!response.ok) {
+        throw new Error(`Mauvaise manip ${response.status}`);
       }
-      return response.json()
+      return response.json();
     })
-    .then((data) =>{
-      console.log(data.items.slice(0, 10))
-      setFonts(data.items.slice(0, 10))
+    .then((data) => {
+      console.log(data.items.slice(0, 10));
+      setFonts(data.items.slice(0, 10));
     })
     .catch((error) => {
-      console.error(error.message)
+      setFonts([]);
+      setError(error.message);
     })
-}, [])
+    .finally(() => {
+      setLoading(false);
+    });
+  }, [filter])
 
   return (
-
-  <div className="col-lg-9">
+    <div className="col-lg-9">
       <section className="row mb-5">
-        <h2 className="mb-3">
-          <span className="badge bg-danger">Top 10 trending</span>
-        </h2>
+        {loading ?
+          (<p className="text-center fs-4">Loading...</p>):(
+            <h2 className="mb-3">
+              <span className="badge bg-danger">
+                {filter === "date" && "Les plus récentes"}
+                {filter === "popularity" && "Les plus populaires"}
+                {filter === "trending" && "Top 10 trending"}
+              </span>
+            </h2>
+          )}
+          {error && <p className="alert alert-danger" >{error}</p>}
+        <GoogleFontLoader
+          fonts={fonts.map((el) => (
+            {
+              font: el.family
+            }
+          ))}
+          subsets={["latin"]}
+        />
         {fonts.map((el) => {
-          return(
-          <Font family={el.family} variants={el.variants} category={el.category} preview={preview}/>
-          )
+          return (
+            <Font
+              family={el.family}
+              variants={el.variants}
+              category={el.category}
+              preview={preview}
+              key={el.family}
+              size={size}
+            />
+          );
         })}
       </section>
-    </div >
-
-  )
+    </div>
+  );
 }
 
 export default Fonts
