@@ -1,6 +1,6 @@
 
 
-const Aside = ({preview, setPreview}) => {
+const Aside = ({ preview, setPreview }) => {
 
 
   return (
@@ -14,10 +14,10 @@ const Aside = ({preview, setPreview}) => {
         </select>
         <div className="mb-3">
           <label htmlFor="text" className="form-label fw-bold mb-3">Tapez votre text</label>
-          <textarea id="text" className="form-control" value={preview} onChange={(event)=>setPreview(event.target.value)}></textarea>
+          <textarea id="text" className="form-control" value={preview} onChange={(event) => setPreview(event.target.value)}></textarea>
         </div>
         <label htmlFor="range" className="form-label fw-bold mb-3">La taille de police</label>
-        <input type="range" className="form-range" id="range" min="8" max="48" step="1" value="20" />
+        <input type="range" className="form-range" id="range" min="8" max="48" step="1" />
       </div>
     </div>
   )
