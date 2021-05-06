@@ -22,7 +22,7 @@ function App() {
           <Fonts preview={preview} size={size} darkMode={darkMode} filter={filter} />
         </div>
       </div>
-      <Footer />
+      <Footer darkMode={darkMode}/>
     </div>
   )
 }
