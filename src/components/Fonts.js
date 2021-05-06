@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Font from './Font'
 import GoogleFontLoader from 'react-google-font-loader'
 
-const Fonts = ({ preview, size, filter }) => {
+const Fonts = ({ preview, size, filter, darkMode }) => {
 
   const [fonts, setFonts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,7 @@ const Fonts = ({ preview, size, filter }) => {
         {loading ?
           (<p className="text-center fs-4">Loading...</p>) : (
             <h2 className="mb-3">
-              <span className="badge bg-danger">
+              <span className={darkMode ?"badge bg-info text-dark":"badge bg-danger"}>
                 {filter === "date" && "Les plus récentes"}
                 {filter === "popularity" && "Les plus populaires"}
                 {filter === "trending" && "Top 10 trending"}
@@ -64,6 +64,7 @@ const Fonts = ({ preview, size, filter }) => {
               preview={preview}
               key={el.family}
               size={size}
+              darkMode={darkMode}
             />
           );
         })}
