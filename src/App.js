@@ -40,12 +40,12 @@ function App() {
   return (
     <div className={modeClasse}>
       <Header darkMode={darkMode} />
-      <div className="container min-vh-100">
+      <main className="container min-vh-100">
         <div className="row my-5">
           <Aside preview={preview} setPreview={setPreview} darkMode={darkMode} setDarkMode={setDarkMode} size={size} setSize={setSize} filter={filter} setFilter={setFilter} />
           <Fonts preview={preview} size={size} darkMode={darkMode} filter={filter} />
         </div>
-      </div>
+      </main>
       <Footer darkMode={darkMode} />
     </div>
   )
