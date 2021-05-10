@@ -23,7 +23,6 @@ const Fonts = ({ preview, size, filter, darkMode }) => {
         setFonts(data.items.slice(0, 10));
       })
       .catch((error) => {
-        console.log(error.message)
         setError(error.message);
         setFonts([]);
       })
