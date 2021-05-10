@@ -11,6 +11,7 @@ const Aside = ({ preview, setPreview, size, setSize, filter, setFilter, darkMode
           <option value="date">Les plus récentes</option>
           <option value="popularity">Les plus populaires</option>
           <option value="trending">Top 10 trending</option>
+          <option value="style">Les plus variées</option>
         </select>
         <div className="mb-3">
           <label htmlFor="text" className="form-label fw-bold mb-3">Tapez votre text</label>
