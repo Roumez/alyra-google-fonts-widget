@@ -17,8 +17,17 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("dark-mode", JSON.stringify(darkMode))
-  }
-  )
+  }, [darkMode])
+
+  useEffect(() => {
+    const handleThemeChange = (e) => {
+      e.matches ? setDarkMode(true) : setDarkMode(false)
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleThemeChange)
+    return () => {
+      window.removeEventListener('change', handleThemeChange)
+    }
+  }, [])
 
   const modeClasse = darkMode ? "bg-dark text-white" : "bg-light"
 
