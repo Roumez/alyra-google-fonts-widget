@@ -15,14 +15,12 @@ const Fonts = ({ preview, size, filter, darkMode }) => {
       `https://www.googleapis.com/webfonts/v1/webfonts?key=${process.env.REACT_APP_GOOGLE_DEVELOPER_API_KEY}&&sort=${filter}`
     )
       .then((response) => {
-        console.log(response);
         if (!response.ok) {
           throw new Error(`Mauvaise manip ${response.status}`);
         }
         return response.json();
       })
       .then((data) => {
-        console.log(data.items.slice(0, 10));
         setFonts(data.items.slice(0, 10));
       })
       .catch((error) => {
