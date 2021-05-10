@@ -16,6 +16,12 @@ function App() {
   const [darkMode, setDarkMode] = useState(getTheme)
 
   useEffect(() => {
+    document.documentElement.lang = "fr"
+    document.title = "React Google Fonts Widget"
+    document.getElementsByName('description')[0]['content'] = "Accès rapide aux dernières polices les plus récentes, les plus trendy et les plus populaires."
+  }, [])
+
+  useEffect(() => {
     localStorage.setItem("dark-mode", JSON.stringify(darkMode))
   }, [darkMode])
 
