@@ -6,17 +6,17 @@ const Fonts = ({ preview, size, filter, darkMode }) => {
 
   const [fonts, setFonts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('')
+  const [error, setError] = useState('');
 
   useEffect(() => {
     setLoading(true);
     setError('')
     fetch(
-      `https://www.googleapis.com/webfonts/v1/webfonts?key=${process.env.REACT_APP_GOOGLE_DEVELOPER_API_KEY}&&sort=${filter}`
-    )
+      `https://www.googleapis.com/webfonts/v9/webfonts?key=${process.env.REACT_APP_GOOGLE_DEVELOPER_API_KEY}&sort=${filter}`)
       .then((response) => {
+        console.log(response)
         if (!response.ok) {
-          throw new Error(`Mauvaise manip ${response.status}`);
+          throw new Error(`Mauvaise manip ${response.status}`)
         }
         return response.json();
       })
@@ -24,8 +24,9 @@ const Fonts = ({ preview, size, filter, darkMode }) => {
         setFonts(data.items.slice(0, 10));
       })
       .catch((error) => {
-        setFonts([]);
+        console.log(error.message)
         setError(error.message);
+        setFonts([]);
       })
       .finally(() => {
         setLoading(false);
