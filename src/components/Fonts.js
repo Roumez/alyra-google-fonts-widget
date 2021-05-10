@@ -12,9 +12,8 @@ const Fonts = ({ preview, size, filter, darkMode }) => {
     setLoading(true);
     setError('')
     fetch(
-      `https://www.googleapis.com/webfonts/v9/webfonts?key=${process.env.REACT_APP_GOOGLE_DEVELOPER_API_KEY}&sort=${filter}`)
+      `https://www.googleapis.com/webfonts/v1/webfonts?key=${process.env.REACT_APP_GOOGLE_DEVELOPER_API_KEY}&sort=${filter}`)
       .then((response) => {
-        console.log(response)
         if (!response.ok) {
           throw new Error(`Mauvaise manip ${response.status}`)
         }
