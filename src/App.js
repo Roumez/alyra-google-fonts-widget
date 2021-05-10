@@ -6,10 +6,14 @@ import { useState, useEffect } from 'react'
 
 function App() {
 
+  const getTheme = () => {
+    return JSON.parse(localStorage.getItem("dark-mode") || window.matchMedia('(prefers-color-scheme: dark)').matches)
+  }
+
   const [preview, setPreview] = useState("Portez ce vieux whisky au juge blond qui fume !? 0123456789");
   const [size, setSize] = useState(20)
   const [filter, setFilter] = useState('date')
-  const [darkMode, setDarkMode] = useState(() => JSON.parse(localStorage.getItem("dark-mode") || false))
+  const [darkMode, setDarkMode] = useState(getTheme)
 
   useEffect(() => {
     localStorage.setItem("dark-mode", JSON.stringify(darkMode))
