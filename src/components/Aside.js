@@ -7,7 +7,7 @@ const Aside = ({ preview, setPreview, size, setSize, filter, setFilter, darkMode
     <div className="col-lg-3 mb-4">
       <div style={{ position: 'sticky', top: '0px' }}>
         <label className="fw-bold mb-2" htmlFor="sort">Afficher des polices</label>
-        <select id="sort" className={darkMode ? "bg-warning form-select mb-4":"bg-whitef orm-select mb-4"} onChange={(event) => setFilter(event.target.value)}>
+        <select id="sort" className={darkMode ? "bg-warning form-select mb-4":"bg-white form-select mb-4"} onChange={(event) => setFilter(event.target.value)}>
           <option value="date">Les plus récentes</option>
           <option value="popularity">Les plus populaires</option>
           <option value="trending">Top 10 trending</option>
